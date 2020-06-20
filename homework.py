@@ -15,12 +15,13 @@ URL_API_PRACTICUM = 'https://praktikum.yandex.ru/api/user_api/homework_statuses/
 bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 def parse_homework_status(homework):
-    homework_name = homework.get('homework_name')
-    if homework.get('status') != 'approved':
+    homework_name = homework['homework_name']
+    if homework['status'] == 'rejected':
         verdict = 'К сожалению в работе нашлись ошибки.'
     else:
-        verdict = 'Ревьюеру всё понравилось, можно приступать к следующему ' \
-                  'уроку. '
+        verdict = (
+            'Ревьюеру всё понравилось, можно приступать к следующему уроку.'
+        )
     return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
 
 
