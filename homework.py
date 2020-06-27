@@ -18,12 +18,12 @@ bot = telegram.Bot(token=TELEGRAM_TOKEN)
 
 
 def parse_homework_status(homework):
-    status_dic = {
+    statuses = {
         'approved': True,
         'rejected': False
     }
     homework_name = homework.get('homework_name')
-    status_homework = status_dic.get(homework.get('status'))
+    status_homework = statuses.get(homework.get('status'))
     if status_homework is not None:
         if status_homework:
             verdict = (
@@ -32,8 +32,8 @@ def parse_homework_status(homework):
         else:
             verdict = 'К сожалению в работе нашлись ошибки.'
         return f'У вас проверили работу "{homework_name}"!\n\n{verdict}'
-    else:
-        return 'Ошибка на сервере: вернулись не верные данные'
+
+    return 'Ошибка на сервере: вернулись не верные данные'
 
 
 def get_homework_statuses(current_timestamp):
